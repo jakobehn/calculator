@@ -4,7 +4,8 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 pool:
-  vmImage: 'ubuntu-latest'
+#  vmImage: 'ubuntu-latest'
+  name: az400
 
 steps:
 - task: NodeTool@0
@@ -12,8 +13,12 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
 
-- script: |
-    npm install
-    npm run build
-    npm test
-  displayName: 'npm install and build, and test'
+- task: CmdLine@2
+  inputs:
+    script: 'npm install'
+  displayName: 'npm install'
+  
+- task: CmdLine@2
+  inputs:
+    script: 'npm test'
+  displayName: 'npm test'
